@@ -1,51 +1,53 @@
-import { useState } from 'react'
+import { useMemo } from 'react'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
-import { NavLink } from 'react-router-dom'
 
 import { useMenu } from '@hooks/useMenu'
+import { useSidebar } from '@hooks/useSidebar'
 
 import {
   ActionSidebar,
+  BorderRadius,
   Container,
   Item,
-  ListMenu,
-  WrapperSidebar,
+  Link,
+  List,
+  Title,
 } from './styles'
 
 const Sidebar = () => {
   const { items, hadleNavLinkClass } = useMenu()
-  const [isSidebarFull, setIsSudebarFull] = useState(true)
+  const { extendedSidebar, handleExtendedSidebar } = useSidebar()
 
-  const handleActionSidebar = () => {
-    setIsSudebarFull(oldValue => !oldValue)
+  const classSidebar = useMemo(
+    () => (extendedSidebar ? 'open' : ''),
+    [extendedSidebar],
+  )
 
-    const sidebar = document.getElementById('sidebar')
-
-    sidebar?.style.setProperty('--opacity', '0')
-
-    sidebar?.addEventListener('transitionend', () => {
-      sidebar.style.setProperty('--opacity', '1')
-      sidebar.removeEventListener('transitionend', () => null)
-    })
-  }
+  const IconSidebar = useMemo(
+    () => (extendedSidebar ? FiChevronsLeft : FiChevronsRight),
+    [extendedSidebar],
+  )
 
   return (
-    <Container id="sidebar" isFull={isSidebarFull}>
-      <WrapperSidebar>
-        <ListMenu>
-          {items.map(({ path, icon: Icon, label }, key) => (
-            <Item key={key} className={hadleNavLinkClass(path)}>
-              <NavLink to={path} exact activeClassName="active">
-                {Icon && <Icon />} {isSidebarFull && <span>{label}</span>}
-              </NavLink>
-            </Item>
-          ))}
-        </ListMenu>
-      </WrapperSidebar>
+    <Container className={classSidebar}>
+      <List>
+        <ActionSidebar type="button" onClick={handleExtendedSidebar}>
+          <IconSidebar />
+        </ActionSidebar>
 
-      <ActionSidebar type="button" onClick={handleActionSidebar}>
-        {isSidebarFull ? <FiChevronsLeft /> : <FiChevronsRight />}
-      </ActionSidebar>
+        {items.map(({ path, icon: Icon, label }, key) => (
+          <Item key={key} className={hadleNavLinkClass(path)}>
+            <BorderRadius />
+            <BorderRadius />
+            <Link to={path}>
+              <i>
+                <Icon />
+              </i>
+              <Title>{label}</Title>
+            </Link>
+          </Item>
+        ))}
+      </List>
     </Container>
   )
 }

@@ -20,6 +20,7 @@ A estrutura segue um padrão de componentes de modularizado, fazendo a utilizaç
 
 - **useAuth**: Responsável por total parte de autenticação;
 - **useMenu**: Responsável por carregar os menus;
+- **useSidebar**: Responsável por controlar a abertura ou fechamento do sidebar;
 - **useStorage**: Responsável por interagir com o local storage;
 - **useTheme**: Responsável por lidar com o tema do sistema;
 

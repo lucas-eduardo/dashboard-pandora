@@ -50,7 +50,7 @@ export default createGlobalStyle`
 
     --sidebar: #fff;
     --sidebar-color: #6e84a3;
-    --sidebar-color-active: #6e84a3;
+    --sidebar-color-active: #333;
   }
 
 

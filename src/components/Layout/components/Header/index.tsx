@@ -1,32 +1,43 @@
 import { useMemo } from 'react'
-import { FiPower, FiSettings } from 'react-icons/fi'
+import { FiMenu, FiPower, FiSettings, FiX } from 'react-icons/fi'
 import { RiDropFill, RiDropLine } from 'react-icons/ri'
 
 import { IconButton } from '@components/IconButton'
 import { ModeTheme } from '@constants/modeTheme'
 import { useAuth } from '@hooks/useAuth'
+import { useSidebar } from '@hooks/useSidebar'
 import { useTheme } from '@hooks/useTheme'
 
-import { Container, WrapperActions, WrapperTitle } from './styles'
+import { ButtonMenu, Container, WrapperActions, WrapperLeft } from './styles'
 
 const Header = () => {
   const { signOut } = useAuth()
   const { modeTheme, handleChangeTheme } = useTheme()
+  const { extendedSidebar, handleExtendedSidebar } = useSidebar()
 
-  const Icon = useMemo(
+  const IconMenu = useMemo(
+    () => (extendedSidebar ? FiX : FiMenu),
+    [extendedSidebar],
+  )
+
+  const IconMode = useMemo(
     () => (modeTheme === ModeTheme.dark ? RiDropFill : RiDropLine),
     [modeTheme],
   )
 
   return (
     <Container>
-      <WrapperTitle>
+      <WrapperLeft>
+        <ButtonMenu type="button" onClick={handleExtendedSidebar}>
+          <IconMenu />
+        </ButtonMenu>
+
         <h2>Pandora</h2>
-      </WrapperTitle>
+      </WrapperLeft>
 
       <WrapperActions>
         <IconButton
-          icon={Icon}
+          icon={IconMode}
           color="var(--icon-theme)"
           onClick={handleChangeTheme}
         />

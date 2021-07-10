@@ -1,156 +1,189 @@
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-type ContainerProps = {
-  isFull: boolean
-}
+export const Container = styled.div`
+  position: fixed;
 
-export const Container = styled.div<ContainerProps>`
-  --opacity: 1;
-
-  width: ${({ isFull }) => (isFull ? 250 : 80)}px;
+  width: 0;
   height: 100%;
 
-  position: relative;
-
-  padding: 40px 0 30px 16px;
+  border-left: 5px solid var(--sidebar);
 
   background-color: var(--sidebar);
 
-  transition: width 0.4s;
+  transition: width 0.5s;
 
-  &:after {
-    content: '';
+  overflow-x: hidden;
 
-    position: absolute;
-
-    width: 8px;
-    height: 100%;
-
-    top: 0;
-    right: 0;
-
-    background-color: var(--background);
+  &.open {
+    width: 260px;
   }
+
+  @media (min-width: 660px) {
+    position: relative;
+
+    width: 80px;
+  }
+`
+
+export const List = styled.ul`
+  position: absolute;
+
+  width: 100%;
+
+  top: 0;
+  left: 0;
+
+  padding-left: 5px;
+  padding-top: 40px;
 `
 
 export const ActionSidebar = styled.button`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
 
   position: absolute;
 
-  top: 5px;
-  right: 8px;
+  width: 40px;
+  height: 40px;
 
-  background-color: var(--background);
+  background-color: transparent;
+  border: none;
 
-  width: 30px;
-  height: 30px;
-
-  border: 3px solid var(--sidebar);
-
-  border-radius: 100%;
+  color: var(--sidebar-color);
 
   cursor: pointer;
 
+  right: 0;
+  top: 0;
+
   z-index: 1;
 
-  color: var(--sidebar-color);
+  svg {
+    font-size: 25px;
+  }
+
+  @media (min-width: 660px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `
 
-export const WrapperSidebar = styled.div`
-  display: flex;
-`
-
-export const ListMenu = styled.ul`
-  width: 100%;
-
-  list-style: none;
-`
-
-export const Item = styled.li`
+export const Item = styled.div`
   position: relative;
 
   width: 100%;
-  height: 45px;
 
-  border-radius: 25px 0 0 25px;
+  list-style: none;
 
-  a {
-    display: inline-flex;
-    align-items: center;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 
-    padding: 0 8px 0 20px;
-
-    width: 100%;
-    height: 100%;
-
-    text-decoration: none;
-
-    font-size: 1.6rem;
-
-    color: var(--sidebar-color);
-
-    column-gap: 16px;
-
-    span {
-      opacity: var(--opacity);
-
-      transition: opacity 0.2s;
-    }
-  }
-
-  &:hover,
   &.active {
     background-color: var(--background);
+
+    i {
+      display: block;
+    }
 
     a {
       color: var(--sidebar-color-active);
     }
   }
+`
+export const BorderRadius = styled.i`
+  &:nth-child(1) {
+    display: none;
 
-  &.active {
+    position: absolute;
+
+    width: 100%;
+    height: 20px;
+
+    top: -20px;
+
+    background-color: var(--background);
+
     &:before {
       content: '';
 
       position: absolute;
 
-      width: 20px;
-      height: 30px;
+      top: 0;
+      left: 0;
 
-      border-radius: 0 25px 0 0;
+      width: 100%;
+      height: 100%;
 
-      right: 0px;
-      bottom: -30px;
+      border-bottom-right-radius: 20px;
 
-      border: 8px solid var(--background);
-
-      border-left: none;
-      border-bottom: none;
+      background-color: var(--sidebar);
     }
+  }
 
-    &:after {
+  &:nth-child(2) {
+    display: none;
+
+    position: absolute;
+
+    width: 100%;
+    height: 20px;
+
+    bottom: -20px;
+
+    background-color: var(--background);
+
+    &:before {
       content: '';
 
       position: absolute;
 
-      width: 20px;
-      height: 30px;
+      width: 100%;
+      height: 100%;
 
-      border-radius: 0 0 25px 0;
+      top: 0;
+      left: 0;
 
-      right: 0px;
-      top: -30px;
+      border-top-right-radius: 20px;
 
-      border: 8px solid var(--background);
-
-      border-left: none;
-      border-top: none;
+      background-color: var(--sidebar);
     }
   }
+`
 
-  & + & {
-    margin-top: 20px;
+export const Link = styled(NavLink)`
+  display: flex;
+
+  width: 100%;
+
+  text-decoration: none;
+
+  color: var(--sidebar-color);
+
+  i {
+    display: block;
+
+    min-width: 60px;
+    height: 60px;
+
+    line-height: 70px;
+
+    text-align: center;
+
+    svg {
+      font-size: 1.5em;
+    }
   }
+`
+
+export const Title = styled.span`
+  display: block;
+
+  height: 60px;
+
+  padding-left: 10px;
+
+  line-height: 60px;
+
+  white-space: normal;
 `

@@ -1,12 +1,12 @@
-import { Layout } from '@components/Layout'
+import { DashboardProvider } from '@providers/DashboardProvider'
 
 import { DashboardRoutes } from './routes'
 
 const Dashboard = () => {
   return (
-    <Layout>
+    <DashboardProvider>
       <DashboardRoutes />
-    </Layout>
+    </DashboardProvider>
   )
 }
 

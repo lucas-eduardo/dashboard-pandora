@@ -30,6 +30,8 @@ export const WrapperContent = styled.div`
   grid-template-rows: 1fr;
   grid-template-areas: 'SIDEBAR MAIN';
 
+  overflow: hidden;
+
   grid-area: CONTENT;
 `
 

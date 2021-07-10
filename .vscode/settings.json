@@ -1,0 +1,25 @@
+{
+  "files.exclude": {
+    "node_modules": true,
+    "package-lock.json": true,
+    "tsconfig.json": true,
+    "config-overrides.js": true,
+    ".gitignore": true,
+    ".editorconfig": true,
+    ".eslint*": true,
+    ".prettierrc": true,
+    ".releaserc": true,
+    "Makefile": true,
+    ".github": true
+  },
+  "editor.rulers": [ 80 ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  }
+}

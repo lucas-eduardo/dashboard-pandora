@@ -1,5 +1,5 @@
-import { useSnackbar } from 'notistack'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { Button } from '@components/Button'
 import { Textfield } from '@components/Textfield'
@@ -13,14 +13,13 @@ type FormData = {
 }
 
 const SignIn = () => {
-  const { enqueueSnackbar } = useSnackbar()
   const { signIn } = useAuth()
   const { register, handleSubmit } = useForm()
 
   const onSubmit = (data: FormData) => {
     signIn(data)
 
-    enqueueSnackbar('Successfully logged in', { variant: 'success' })
+    toast.success('Successfully logged in')
   }
 
   return (

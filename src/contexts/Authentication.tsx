@@ -1,5 +1,5 @@
-import { useSnackbar } from 'notistack'
 import { ReactNode, useCallback, useState } from 'react'
+import { toast } from 'react-toastify'
 import { createContext } from 'use-context-selector'
 
 import { useStorage } from '@hooks/useStorage'
@@ -27,7 +27,6 @@ type AuthenticationProviderProps = {
 const AuthenticationContext = createContext({} as AuthenticationContextData)
 
 const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
-  const { enqueueSnackbar } = useSnackbar()
   const { getStorage, setStorage, removeKeyStorage } = useStorage()
 
   const [user, setUser] = useState<UserState | null>(() => {
@@ -65,8 +64,8 @@ const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
 
     setUser(null)
 
-    enqueueSnackbar('Logged out of the system', { variant: 'success' })
-  }, [enqueueSnackbar, removeKeyStorage])
+    toast.success('Logged out of the system')
+  }, [removeKeyStorage])
 
   return (
     <AuthenticationContext.Provider

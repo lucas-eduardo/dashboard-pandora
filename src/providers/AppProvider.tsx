@@ -1,20 +1,19 @@
-import { SnackbarProvider } from 'notistack'
 import { ReactNode } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 import { AuthenticationProvider } from '@contexts/Authentication'
 import { ThemeProvider } from '@contexts/Theme'
 import Global from '@styles/global'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 type AppProviderProps = {
   children: ReactNode
 }
 
 const AppProvider = ({ children }: AppProviderProps) => (
-  <SnackbarProvider
-    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-    preventDuplicate
-  >
+  <>
     <AuthenticationProvider>
       <BrowserRouter>
         <ThemeProvider>
@@ -23,7 +22,9 @@ const AppProvider = ({ children }: AppProviderProps) => (
         </ThemeProvider>
       </BrowserRouter>
     </AuthenticationProvider>
-  </SnackbarProvider>
+
+    <ToastContainer position="bottom-center" />
+  </>
 )
 
 export { AppProvider }
